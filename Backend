@@ -1,1 +1,59 @@
+package main
 
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"os"
+)
+
+type RedditUser struct {
+	// The json tags tell encoding/json how struct fields should map to JSON
+	// keys. In this case, if the tags were missing, decoding would still
+	// work correctly, but if the struct were encoded as JSON, the keys
+	// would be different from the original JSON ("Name" instead of "name",
+	// etc.), so it's a good idea to add the tags even if you're only
+	// decoding for now.
+	sneakTime         string `json:"stat.sneakTime"`
+	walkOneCm         string `json:"stat.walkOneCm"`
+	crouchOneCm         string `json:"stat.crouchOneCm"`
+	sprintOneCm         string `json:"stat.sprintOneCm"`
+	swimOneCm         string `json:"stat.swimOneCm"`
+	fallOneCm         string `json:"stat.fallOneCm"`
+	climbOneCm         string `json:"stat.climbOneCm"`
+	flyOneCm         string `json:"stat.flyOneCm"`
+	diveOneCm         string `json:"stat.diveOneCm"`
+	minecartOneCm         string `json:"stat.minecartOneCm"`
+	boatOneCm         string `json:"stat.boatOneCm"`
+	pigOneCm         string `json:"stat.pigOneCm"`
+	horseOneCm         string `json:"stat.horseOneCm"`
+	aviateOneCm         string `json:"stat.aviateOneCm"`
+	jump         string `json:"stat.jump"`
+	damageDealt         string `json:"stat.damageDealt"`
+	damageTaken         string `json:"stat.damageTaken"`
+	deaths         string `json:"stat.deaths"`
+	mobKills         string `json:"stat.mobKills"`
+	playerKills         string `json:"stat.playerKills"`
+	drop         string `json:"stat.drop"`
+	itemEnchanted         string `json:"stat.itemEnchanted"`
+	animalsBred         string `json:"stat.animalsBred"`
+	fishCaught         string `json:"stat.fishCaught"`
+	junkFished         string `json:"stat.junkFished"`
+	treasureFished         string `json:"stat.treasureFished"`
+	talkedToVillager         string `json:"stat.talkedToVillager"`
+	mobKills         string `json:"stat.mobKills"`
+	
+}
+
+func main() {
+	file, err := os.Open("data.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	var ru Stat
+	if err := json.NewDecoder(file).Decode(&ru); err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(ru.Name == "Stat")
+}
